@@ -15,7 +15,7 @@ class StudentResponse extends Page
     protected static ?string $title = 'Angket Siswa';
     protected static string $view = 'filament.pages.student-response';
     protected static string $layout = 'filament-panels::components.layout.simple';
-    public $name, $email, $bornplace, $birthdate, $nik, $province_id, $district_id, $regency_id, $village_id, $school, $phone;
+    public $name, $email, $bornplace, $birthdate, $nik, $province_id, $district_id, $regency_id, $village_id, $school, $phone, $year_graduation, $achievement, $rangking, $program, $information;
     public static function shouldRegisterNavigation(): bool
     {
         return false;
@@ -24,22 +24,27 @@ class StudentResponse extends Page
     protected function getFormSchema(): array
     {
         return [
-            Forms\Components\TextInput::make('Nama Lengkap')
+            Forms\Components\TextInput::make('name')
+                ->label('Nama Lengkap')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\TextInput::make('Email')
+            Forms\Components\TextInput::make('email')
+                ->label('Email')
                 ->email()
                 ->required()
                 ->maxLength(255),
-            Forms\Components\TextInput::make('Tempat Lahir')
+            Forms\Components\TextInput::make('bornplace')
+                ->label('Tempat Lahir')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\DatePicker::make('Tanggal Lahirr')
+            Forms\Components\DatePicker::make('birthdate')
+                ->label('Tanggal Lahir')
                 ->required(),
             Forms\Components\Select::make('province_id')
                 ->label('Provinsi')
                 ->options(Province::all()->pluck('name', 'id'))
                 ->reactive()
+                ->required()
                 ->afterStateUpdated(function ($set, $state) {
                     $set('district_id', null);
                     $set('subdistrict_id', null);
@@ -51,6 +56,7 @@ class StudentResponse extends Page
                     return Regency::where('province_id', $get('province_id'))->pluck('name', 'id');
                 })
                 ->reactive()
+                ->required()
                 ->afterStateUpdated(function ($set, $state) {
                     $set('district_id', null);
                     $set('village_id', null);
@@ -61,6 +67,7 @@ class StudentResponse extends Page
                     return District::where('regency_id', $get('regency_id'))->pluck('name', 'id');
                 })
                 ->reactive()
+                ->required()
                 ->afterStateUpdated(function ($set, $state) {
                     $set('village_id', null);
                 }),
@@ -69,29 +76,49 @@ class StudentResponse extends Page
                 ->options(function ($get) {
                     return Village::where('district_id', $get('district_id'))->pluck('name', 'id');
                 })
-                ->reactive(),
-            Forms\Components\TextInput::make('Asal Sekolah')
+                ->reactive()
+                ->required(),
+            Forms\Components\TextInput::make('school')
+                ->label('Asal Sekolah')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\TextInput::make('Tahun Tamat')
+            Forms\Components\Select::make('year_graduation')
+                ->options([
+                    '2025' => '2025',
+                    '2024' => '2024',
+                    '2023' => '2023',
+                    '2022' => '2022',
+                ])
+                ->label('Tahun Lulus')
+                ->required(),
+
+            Forms\Components\TextInput::make('achievement')
+                ->label('Prestasi')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\TextInput::make('Prestasi')
-                ->required()
-                ->maxLength(255),
-            Forms\Components\TextInput::make('Rangking Terkahir')
+            Forms\Components\TextInput::make('rangking')
+                ->label('Rangking Terkahir')
                 ->required()
                 ->numeric(),
-            Forms\Components\TextInput::make('No.HP/WhatsApp')
+            Forms\Components\TextInput::make('phone')
+                ->label('No. HP/WA')
                 ->tel()
                 ->required()
                 ->maxLength(255),
-            Forms\Components\TextInput::make('Program Beasiswa')
+            Forms\Components\TextInput::make('program')
+                ->label('Program Beasiswa')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\TextInput::make('Mendapatkan Informasi')
-                ->required()
-                ->maxLength(255),
+            Forms\Components\Select::make('information')
+                ->label('Sumber Informasi')
+                ->options([
+                    'Brosur' => 'Brosur',
+                    'Facebook' => 'Facebook',
+                    'Instagram' => 'Instagram',
+                    'Teman' => 'Teman',
+                    'Marketing' => 'Marketing',
+                ])
+                ->required(),
         ];
     }
 
@@ -99,7 +126,7 @@ class StudentResponse extends Page
     {
         $validatedData = $this->form->getState();
         $this->form->validate($validatedData);
-        \App\Models\Participant::create([
+        \App\Models\StudentResponse::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'bornplace' => $validatedData['bornplace'],
