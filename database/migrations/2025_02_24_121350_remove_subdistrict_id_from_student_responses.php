@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('student_responses', function (Blueprint $table) {
-            //
+            $table->dropColumn('subdistrict_id');
         });
     }
 
