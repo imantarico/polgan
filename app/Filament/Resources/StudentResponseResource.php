@@ -38,10 +38,10 @@ class StudentResponseResource extends Resource
                 Forms\Components\TextInput::make('province_id')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('district_id')
+                Forms\Components\TextInput::make('regency_id')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('subdistrict_id')
+                Forms\Components\TextInput::make('district_id')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('village_id')
@@ -88,10 +88,10 @@ class StudentResponseResource extends Resource
                 Tables\Columns\TextColumn::make('province_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('district_id')
+                Tables\Columns\TextColumn::make('regency_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('subdistrict_id')
+                Tables\Columns\TextColumn::make('district_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('village_id')

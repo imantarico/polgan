@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('bornplace');
             $table->date('birthdate');
             $table->foreignId('province_id');
+            $table->foreignId('regency_id');
             $table->foreignId('district_id');
-            $table->foreignId('subdistrict_id');
             $table->foreignId('village_id');
             $table->string('school');
             $table->string('year_graduation');
