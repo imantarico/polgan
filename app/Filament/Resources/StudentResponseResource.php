@@ -141,40 +141,53 @@ class StudentResponseResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nama Lengkap')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('bornplace')
+                    ->label('Tempat Lahir')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('birthdate')
+                    ->label('Tanggal Lahir')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('province_id')
+                Tables\Columns\TextColumn::make('province.name')
+                    ->label('Provinsi')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('regency_id')
+                Tables\Columns\TextColumn::make('regency.name')
+                    ->label('Kabupaten')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('district_id')
+                Tables\Columns\TextColumn::make('district.name')
+                    ->label('Kecamatan')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('village_id')
+                Tables\Columns\TextColumn::make('village.name')
+                    ->label('Kelurahan/Desa')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('school')
+                    ->label('Asal Sekolah')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('year_graduation')
+                    ->label('Tahun Lulus')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('achievement')
+                    ->label('Prestasi')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('rangking')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('phone')
+                    ->label('No. HP/WA')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('program')
+                    ->label('Program Beasiswa')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('information')
+                    ->label('Sumber Informasi')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
