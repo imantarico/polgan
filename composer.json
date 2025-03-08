@@ -9,6 +9,7 @@
         "azishapidin/indoregion": "^3.0",
         "filament/filament": "^3.2",
         "filament/forms": "^3.2",
+        "joshembling/image-optimizer": "^1.5",
         "laravel/breeze": "^2.1",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9"

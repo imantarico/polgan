@@ -7,6 +7,8 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/angket', \App\Filament\Pages\StudentResponse::class)->name('student-response');
+//college-form
+// Route::get('admin/college-form', \App\Filament\Pages\CollegeForm::class)->name('college-form');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -72,6 +72,7 @@ class UserResource extends Resource
 
                 Tables\Columns\ToggleColumn::make('active')->sortable(),
 
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -85,6 +86,21 @@ class UserResource extends Resource
             ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('resetPassword')
+
+
+                    ->icon('heroicon-o-key')
+                    ->label('Reset')
+                    ->color('warning')
+                    ->requiresConfirmation()
+                    ->action(function (User $record) {
+                        $record->update(['password' => Hash::make('password')]);
+                        Notification::make()
+                            ->title('Berhasil Reset Password')
+                            ->body("Password user {$record->name} berhasil direset")
+                            ->success()
+                            ->send();
+                    }),
 //                Tables\Actions\Action::make('loginAs')
 //                    ->label('Login As')
 //                    ->color('warning')
