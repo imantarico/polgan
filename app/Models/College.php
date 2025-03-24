@@ -9,4 +9,16 @@ class College extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $casts = [
+        'logo' => 'array',
+    ];
+
+    protected function getFormModel(): string
+    {
+    return College::class;
+    }
+    protected function getFormStatePath(): ?string
+    {
+        return 'college';
+    }
 }

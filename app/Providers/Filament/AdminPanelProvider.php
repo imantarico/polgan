@@ -18,9 +18,11 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Pages\CollegeForm;
+use Filament\Navigation\NavigationItem;
 
 class AdminPanelProvider extends PanelProvider
 {
+
 
     public function panel(Panel $panel): Panel
     {
@@ -34,14 +36,20 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->navigationItems([
+                NavigationItem::make('Identitas PT')
+                    ->group('Setting')
+                    ->url('/admin/colleges/0/edit') // Ganti dengan link manual yang diinginkan
+                    ->icon('heroicon-o-building-office')
+            ])
             ->pages([
                 Pages\Dashboard::class,
-                CollegeForm::class,
+                // CollegeForm::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\AccountWidget::class,
+                // Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
