@@ -39,7 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->navigationItems([
                 NavigationItem::make('Identitas PT')
                     ->group('Setting')
-                    ->url('/admin/colleges/0/edit') // Ganti dengan link manual yang diinginkan
+                    ->url('/admin/colleges/1/edit')
                     ->icon('heroicon-o-building-office')
             ])
             ->pages([
