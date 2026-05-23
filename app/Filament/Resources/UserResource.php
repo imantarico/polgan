@@ -82,6 +82,7 @@ class UserResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            //show
             ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -89,7 +90,7 @@ class UserResource extends Resource
 
 
                     ->icon('heroicon-o-key')
-                    ->label('Reset')
+                    ->label('Resetf')
                     ->color('warning')
                     ->requiresConfirmation()
                     ->action(function (User $record) {
